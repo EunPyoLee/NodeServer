@@ -8,3 +8,7 @@ handle["/start"] = requestHandlers.start;
 handle["/upload"] = requestHandlers.upload;
 
 server.start(router.route, handle);//functional programming, we sending function rather than the thing/object
+
+/*
+"request handler response handling" doesn't allow us to make proper use of non-blocking operations
+*/
