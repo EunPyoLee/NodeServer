@@ -9,20 +9,20 @@ Here, we handle the POST data processing in the server, so that we pass the fina
 */
 function start(route, handle){
     function onRequest(request, response){
-        var postData = "";
+        // var postData = "";
         var pathname = url.parse(request.url).pathname;
         console.log("Request for " + pathname + " received.");
+        route(handle, pathname, response, request);
+        // request.setEncoding("utf8");
 
-        request.setEncoding("utf8");
+        // request.addListener("data", (postDataChunk) => {
+        //     postData += postDataChunk; //it's like a tcp collecting packet
+        //     console.log("Received POST data chunk '" + postDataChunk + "'.");
+        // })
 
-        request.addListener("data", (postDataChunk) => {
-            postData += postDataChunk; //it's like a tcp collecting packet
-            console.log("Received POST data chunk '" + postDataChunk + "'.");
-        })
-
-        request.addListener("end", () => {
-            route(handle,pathname, response, postData);
-        })
+        // request.addListener("end", () => {
+        //     route(handle,pathname, response, postData);
+        // })
     }
     http.createServer(onRequest).listen(8888);//Opens up the server on port 8888 and keep running the server there
     console.log("Server has started.");
